@@ -9,214 +9,170 @@
     <!-- Highlight.js for code block styling -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nord.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
-      /* Base styles */
+      /* Global Styles */
       body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #f4f7fa;
-        color: #333;
-        transition: background-color 0.3s, color 0.3s;
-      }
-      .dark-mode {
         background-color: #121212;
         color: #e0e0e0;
       }
+      a {
+        color: #6200ea;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .hidden {
+        display: none;
+      }
+      /* Header */
       header {
+        background-color: #1e1e1e;
+        padding: 16px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        border-bottom: 1px solid #333;
+        z-index: 1000;
       }
-      header .logo {
-        font-size: 20px;
+      .logo {
+        font-size: 24px;
         font-weight: bold;
+        color: #e0e0e0;
       }
-      header .header-buttons button {
-        margin-left: 10px;
-        padding: 8px 12px;
-        background-color: #fff;
-        color: #4caf50;
+      .header-buttons {
+        display: flex;
+        gap: 12px;
+      }
+      .header-buttons button {
+        background-color: #6200ea;
+        color: #fff;
         border: none;
+        padding: 8px 12px;
         border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.3s;
       }
-      header .header-buttons button:hover {
-        background-color: #e0e0e0;
+      .header-buttons button:hover {
+        background-color: #7e3ff2;
       }
+      /* Main Content */
       main {
-        padding: 20px;
+        padding: 80px 16px 16px;
         max-width: 800px;
         margin: 0 auto;
       }
-      /* Welcome screen styles */
-      #welcome-screen {
+      /* Welcome Page */
+      #welcome-page {
         text-align: center;
       }
-      #welcome-screen h1 {
-        font-size: 28px;
-        margin-bottom: 20px;
+      #welcome-page h1 {
+        font-size: 2em;
+        margin-bottom: 16px;
       }
-      #welcome-screen ol,
-      #welcome-screen ul {
-        text-align: left;
-        display: inline-block;
-        margin: 0 auto 20px auto;
-        padding: 0;
+      #welcome-page p {
+        margin-bottom: 16px;
       }
-      #welcome-screen li {
-        margin-bottom: 10px;
-      }
-      #welcome-screen button {
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 4px;
-        background-color: #4caf50;
+      #welcome-page button {
+        background-color: #6200ea;
         color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.3s;
       }
-      #welcome-screen button:hover {
-        background-color: #45a049;
+      #welcome-page button:hover {
+        background-color: #7e3ff2;
       }
-      /* Chat page styles */
+      /* Chat Page */
       #chat-page {
-        display: none;
-        height: 70vh;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: #fff;
-        overflow: hidden;
+        height: calc(100vh - 120px);
       }
       #chat-history {
         flex: 1;
-        padding: 10px;
+        padding: 16px;
         overflow-y: auto;
+        border-bottom: 1px solid #333;
+        font-size: 1em;
       }
-      .chat-input {
+      #chat-input-container {
         display: flex;
-        border-top: 1px solid #ddd;
+        padding: 16px;
+        background-color: #1e1e1e;
       }
-      .chat-input input {
+      #chat-input-container input {
         flex: 1;
         padding: 10px;
-        border: none;
-        outline: none;
-        font-size: 16px;
-      }
-      .chat-input button {
-        padding: 10px 20px;
-        background-color: #4caf50;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-      }
-      .chat-input button:hover {
-        background-color: #45a049;
-      }
-      .message {
-        margin-bottom: 10px;
-        padding: 8px;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #333;
         border-radius: 4px;
+        font-size: 1em;
+      }
+      #chat-input-container button {
+        background-color: #6200ea;
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        margin-left: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #chat-input-container button:hover {
+        background-color: #7e3ff2;
+      }
+      /* Chat Messages */
+      .message {
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        max-width: 80%;
+        position: relative;
+        word-wrap: break-word;
       }
       .user-message {
-        background-color: #e0f7fa;
-        align-self: flex-end;
+        background-color: #6200ea;
+        color: #fff;
+        margin-left: auto;
+        border-radius: 8px 8px 0 8px;
       }
       .gemini-message {
-        background-color: #f1f1f1;
-        align-self: flex-start;
+        background-color: #333;
+        color: #e0e0e0;
+        margin-right: auto;
+        border-radius: 8px 8px 8px 0;
       }
-      /* Modal styles */
-      .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .modal-content {
-        background-color: #fff;
-        padding: 20px;
+      /* Code Block Styling */
+      .hljs {
+        background: #1f2937 !important;
         border-radius: 8px;
-        max-width: 500px;
-        width: 90%;
-        text-align: left;
+        padding: 16px;
       }
-      .modal-content h2 {
-        margin-top: 0;
-      }
-      .modal-content input[type='text'] {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-      .modal-buttons {
-        text-align: right;
-      }
-      .modal-buttons button {
-        margin-left: 10px;
-        padding: 8px 12px;
-        border: none;
-        border-radius: 4px;
-        background-color: #4caf50;
-        color: #fff;
-        cursor: pointer;
-      }
-      .modal-buttons button:hover {
-        background-color: #45a049;
-      }
-      /* Footer styles */
-      footer {
-        text-align: center;
-        padding: 10px 0;
-        background-color: #4caf50;
-        color: #fff;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-      }
-      /* Gemini response styling for code blocks */
-      .gemini-message pre {
-        background-color: #2d2d2d;
-        color: #f8f8f2;
-        padding: 10px;
-        border-radius: 4px;
-        overflow-x: auto;
-        position: relative;
-      }
-      .gemini-message pre code {
-        background: none;
-        padding: 0;
-        color: inherit;
-        font-family: monospace;
-      }
+      /* Copy Button & Acknowledgement */
       .copy-btn {
         position: absolute;
-        top: 5px;
-        right: 5px;
-        padding: 4px 8px;
-        font-size: 12px;
-        background-color: rgba(0, 0, 0, 0.5);
+        top: 8px;
+        right: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
         color: #fff;
         border: none;
         border-radius: 4px;
+        padding: 4px 8px;
         cursor: pointer;
         opacity: 0.7;
         transition: opacity 0.3s;
@@ -224,290 +180,387 @@
       .copy-btn:hover {
         opacity: 1;
       }
-      /* Responsive adjustments */
+      .copy-ack {
+        position: absolute;
+        top: 8px;
+        right: 60px;
+        background-color: #6200ea;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .copy-ack.show {
+        opacity: 1;
+      }
+      /* Modal Styling */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+      .modal-content {
+        background-color: #1e1e1e;
+        padding: 24px;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 90%;
+        color: #e0e0e0;
+      }
+      .modal-content h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+      }
+      .modal-content input[type='text'] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        font-size: 1em;
+      }
+      .modal-buttons {
+        text-align: right;
+      }
+      .modal-buttons button {
+        background-color: #6200ea;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 8px;
+        transition: background-color 0.3s;
+      }
+      .modal-buttons button:hover {
+        background-color: #7e3ff2;
+      }
+      /* Footer */
+      footer {
+        background-color: #1e1e1e;
+        padding: 16px;
+        text-align: center;
+        border-top: 1px solid #333;
+      }
+      /* Responsive Adjustments */
       @media (max-width: 600px) {
-        header,
-        footer {
-          padding: 10px;
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 12px;
+        }
+        .logo {
+          font-size: 20px;
+          margin-bottom: 8px;
         }
         main {
+          padding: 60px 8px 8px;
+        }
+        #chat-page {
+          height: calc(100vh - 100px);
+        }
+        .message {
+          font-size: 0.9em;
           padding: 10px;
+        }
+        #chat-input-container input,
+        #chat-input-container button {
+          font-size: 0.9em;
+          padding: 8px;
         }
       }
     </style>
   </head>
   <body>
-    <!-- Header with quirky site name, dark/light mode toggle, and API Keys button -->
+    <!-- Header -->
     <header>
       <div class="logo">Gemini Query Lab</div>
       <div class="header-buttons">
-        <button id="toggle-mode">Dark Mode</button>
-        <button id="api-key-btn">API Keys</button>
+        <button id="download-history">Download History</button>
+        <button id="clear-history">Clear History</button>
+        <button id="toggle-theme">Toggle Theme</button>
+        <button id="settings-btn">Settings</button>
       </div>
     </header>
 
-    <!-- Main content -->
+    <!-- Main Content -->
     <main>
-      <!-- Welcome screen with instructions -->
-      <section id="welcome-screen">
-        <h1>Welcome to Gemini Query Lab</h1>
-        <p>Follow these steps to get your own Gemini API Key:</p>
-        <ol>
-          <li>
-            Go to your
-            <a href="https://console.cloud.google.com" target="_blank"
-              >Google Cloud Console</a
-            >.
-          </li>
-          <li>Create or select a project.</li>
-          <li>Enable the Gemini API.</li>
-          <li>Navigate to the Credentials page and create an API key.</li>
-          <li>Copy your API key.</li>
-        </ol>
-        <p>How to use this website:</p>
-        <ul>
-          <li>Click “Get Started”</li>
-          <li>Enter your Gemini API Key</li>
-          <li>Start prompting and receive answers!</li>
-        </ul>
-        <button id="get-started-btn">Get Started</button>
-      </section>
+      <!-- Welcome Page -->
+      <div id="welcome-page" class="hidden">
+        <div style="text-align: center">
+          <h1>Welcome to Gemini Query Lab</h1>
+          <p>Get started by setting up your API key.</p>
+          <button id="setup-key-btn">Set Up API Key</button>
+          <p>
+            <a href="https://drasticcoder.in/gemini-guide" target="_blank">
+              Need help? View our guide
+            </a>
+          </p>
+        </div>
+      </div>
 
-      <!-- Chat / Q&A page -->
-      <section id="chat-page">
+      <!-- Chat Page -->
+      <div id="chat-page" class="hidden">
         <div id="chat-history"></div>
-        <div class="chat-input">
+        <div id="chat-input-container">
           <input
             type="text"
             id="question-input"
             placeholder="Type your question here..."
           />
-          <button id="ask-btn">Ask</button>
-        </div>
-      </section>
-    </main>
-
-    <!-- API Key Modal -->
-    <div id="api-key-modal" class="modal" style="display: none">
-      <div class="modal-content">
-        <h2>Enter your Gemini API Key</h2>
-        <p>To obtain your API key:</p>
-        <ol>
-          <li>
-            Visit the
-            <a href="https://console.cloud.google.com" target="_blank"
-              >Google Cloud Console</a
-            >.
-          </li>
-          <li>Create or select your project.</li>
-          <li>Enable the Gemini API.</li>
-          <li>Go to the Credentials section and create an API key.</li>
-          <li>Paste your API key below.</li>
-        </ol>
-        <input
-          type="text"
-          id="modal-api-key"
-          placeholder="Your Gemini API Key"
-        />
-        <div class="modal-buttons">
-          <button id="save-api-key-btn">Save API Key</button>
-          <button id="close-api-key-modal">Cancel</button>
+          <button id="ask-btn">Send</button>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer>
       <p>
-        DrasticCoder © 2025 (<a
-          href="https://drasticcoder.in"
-          target="_blank"
-          style="color: inherit"
+        DrasticCoder © 2025 (<a href="https://drasticcoder.in" target="_blank"
           >drasticcoder.in</a
         >)
       </p>
     </footer>
 
+    <!-- Settings Modal (for API Key) -->
+    <div id="settings-modal" class="modal">
+      <div class="modal-content">
+        <h2>API Key Settings</h2>
+        <input
+          type="text"
+          id="api-key-input"
+          placeholder="Enter your Gemini API Key"
+        />
+        <div class="modal-buttons">
+          <button id="cancel-settings">Cancel</button>
+          <button id="save-settings">Save</button>
+        </div>
+      </div>
+    </div>
+
     <script>
-      // Wait for DOM to load
-      document.addEventListener('DOMContentLoaded', () => {
-        // Elements
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const chatPage = document.getElementById('chat-page');
-        const getStartedBtn = document.getElementById('get-started-btn');
-        const apiKeyModal = document.getElementById('api-key-modal');
-        const saveApiKeyBtn = document.getElementById('save-api-key-btn');
-        const closeApiKeyModalBtn = document.getElementById(
-          'close-api-key-modal',
-        );
-        const apiKeyBtn = document.getElementById('api-key-btn');
-        const toggleModeBtn = document.getElementById('toggle-mode');
-        const chatHistory = document.getElementById('chat-history');
-        const askBtn = document.getElementById('ask-btn');
-        const questionInput = document.getElementById('question-input');
+      // ----- Theme and Page Initialization -----
+      // For this version we stick to the dark theme.
+      // (The toggle-theme button is kept for demonstration.)
+      const theme = localStorage.getItem('theme') || 'dark';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
 
-        // Dark mode toggle
-        toggleModeBtn.addEventListener('click', () => {
-          document.body.classList.toggle('dark-mode');
-          toggleModeBtn.textContent = document.body.classList.contains(
-            'dark-mode',
-          )
-            ? 'Light Mode'
-            : 'Dark Mode';
+      // ----- Page Visibility -----
+      const welcomePage = document.getElementById('welcome-page');
+      const chatPage = document.getElementById('chat-page');
+      const settingsModal = document.getElementById('settings-modal');
+
+      function updatePageVisibility() {
+        if (localStorage.getItem('geminiApiKey')) {
+          welcomePage.classList.add('hidden');
+          chatPage.classList.remove('hidden');
+        } else {
+          welcomePage.classList.remove('hidden');
+          chatPage.classList.add('hidden');
+        }
+      }
+      updatePageVisibility();
+
+      // ----- Header Buttons -----
+      document.getElementById('toggle-theme').addEventListener('click', () => {
+        // For demonstration toggle (but we stick to dark theme by default)
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      document
+        .getElementById('download-history')
+        .addEventListener('click', () => {
+          const historyText = localStorage.getItem('chatHistory') || '';
+          const blob = new Blob([historyText], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'chat_history.txt';
+          a.click();
+          URL.revokeObjectURL(url);
         });
 
-        // API Keys button shows the modal
-        apiKeyBtn.addEventListener('click', () => {
-          openApiKeyModal();
+      document.getElementById('clear-history').addEventListener('click', () => {
+        localStorage.removeItem('chatHistory');
+        chatHistoryData = [];
+        chatHistoryElement.innerHTML = '';
+      });
+
+      document.getElementById('settings-btn').addEventListener('click', () => {
+        document.getElementById('api-key-input').value =
+          localStorage.getItem('geminiApiKey') || '';
+        settingsModal.style.display = 'flex';
+      });
+
+      document
+        .getElementById('cancel-settings')
+        .addEventListener('click', () => {
+          settingsModal.style.display = 'none';
         });
 
-        function openApiKeyModal() {
-          // Pre-fill if a key is already stored
-          const storedKey = localStorage.getItem('geminiApiKey');
-          if (storedKey) {
-            document.getElementById('modal-api-key').value = storedKey;
-          }
-          apiKeyModal.style.display = 'flex';
-        }
-
-        function closeApiKeyModal() {
-          apiKeyModal.style.display = 'none';
-        }
-
-        // Save API key from modal and, if on welcome screen, proceed to chat page
-        saveApiKeyBtn.addEventListener('click', () => {
-          const key = document.getElementById('modal-api-key').value.trim();
-          if (!key) {
-            alert('Please enter a valid API key.');
-            return;
-          }
+      document.getElementById('save-settings').addEventListener('click', () => {
+        const key = document.getElementById('api-key-input').value.trim();
+        if (key) {
           localStorage.setItem('geminiApiKey', key);
-          closeApiKeyModal();
-          if (welcomeScreen.style.display !== 'none') {
-            showChatPage();
-          }
-        });
-
-        closeApiKeyModalBtn.addEventListener('click', () => {
-          closeApiKeyModal();
-        });
-
-        // On Get Started click, if no API key, ask for it; otherwise, show chat
-        getStartedBtn.addEventListener('click', () => {
-          const storedKey = localStorage.getItem('geminiApiKey');
-          if (!storedKey) {
-            openApiKeyModal();
-          } else {
-            showChatPage();
-          }
-        });
-
-        function showChatPage() {
-          welcomeScreen.style.display = 'none';
-          chatPage.style.display = 'flex';
-        }
-
-        // Function to add messages to the chat history
-        function addMessage(content, isUser = true) {
-          const messageDiv = document.createElement('div');
-          messageDiv.classList.add(
-            'message',
-            isUser ? 'user-message' : 'gemini-message',
-          );
-          if (!isUser) {
-            // Render markdown for Gemini responses
-            const html = marked.parse(content);
-            messageDiv.innerHTML = html;
-            // Process code blocks: highlight and add copy buttons
-            messageDiv.querySelectorAll('pre code').forEach((block) => {
-              hljs.highlightElement(block);
-              const copyBtn = document.createElement('button');
-              copyBtn.textContent = 'Copy';
-              copyBtn.classList.add('copy-btn');
-              copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(block.innerText);
-              });
-              // Wrap code block in a container for relative positioning
-              const preContainer = document.createElement('div');
-              preContainer.style.position = 'relative';
-              preContainer.appendChild(block.parentNode.cloneNode(true));
-              preContainer.appendChild(copyBtn);
-              messageDiv.innerHTML = messageDiv.innerHTML.replace(
-                block.parentNode.outerHTML,
-                preContainer.outerHTML,
-              );
-            });
-          } else {
-            messageDiv.textContent = content;
-          }
-          chatHistory.appendChild(messageDiv);
-          chatHistory.scrollTop = chatHistory.scrollHeight;
-        }
-
-        // Ask button event handler – adds the user's question and calls the Gemini API
-        askBtn.addEventListener('click', () => {
-          const question = questionInput.value.trim();
-          if (!question) return;
-          addMessage(question, true);
-          questionInput.value = '';
-          callGeminiAPI(question);
-        });
-
-        // Function to call Gemini API with the given question
-        function callGeminiAPI(question) {
-          const apiKey = localStorage.getItem('geminiApiKey');
-          if (!apiKey) {
-            alert('API key not set. Please set your Gemini API key.');
-            return;
-          }
-          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-          const payload = {
-            contents: [
-              {
-                parts: [
-                  {
-                    text: question,
-                  },
-                ],
-              },
-            ],
-          };
-          console.log('Sending request to:', apiUrl);
-          console.log('Payload:', JSON.stringify(payload));
-          const loadingMessage = document.createElement('div');
-          loadingMessage.classList.add('message', 'gemini-message');
-          loadingMessage.textContent = 'Loading...';
-          chatHistory.appendChild(loadingMessage);
-          fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          })
-            .then((response) => {
-              console.log('Raw response:', response);
-              return response.json();
-            })
-            .then((data) => {
-              console.log('Parsed response:', data);
-              chatHistory.removeChild(loadingMessage);
-              if (data && data.candidates && data.candidates.length > 0) {
-                const answer =
-                  data.candidates[0]?.content?.parts[0]?.text ||
-                  'No answer found.';
-                addMessage(answer, false);
-              } else {
-                addMessage('No answer found.', false);
-              }
-            })
-            .catch((error) => {
-              console.error('Fetch error:', error);
-              chatHistory.removeChild(loadingMessage);
-              addMessage('Something went wrong: ' + error.message, false);
-            });
+          settingsModal.style.display = 'none';
+          updatePageVisibility();
+        } else {
+          alert('Please enter a valid API key.');
         }
       });
+
+      document.getElementById('setup-key-btn').addEventListener('click', () => {
+        settingsModal.style.display = 'flex';
+      });
+
+      // ----- Chat Functionality -----
+      let chatHistoryData =
+        JSON.parse(localStorage.getItem('chatHistory')) || [];
+      const chatHistoryElement = document.getElementById('chat-history');
+      const questionInput = document.getElementById('question-input');
+      const chatForm = document.getElementById('chat-form'); // not used since we use "submit" on button
+
+      function saveChatHistory() {
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistoryData));
+      }
+
+      function renderChatHistory() {
+        chatHistoryElement.innerHTML = '';
+        chatHistoryData.forEach((message) => {
+          renderMessage(message);
+        });
+        chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
+      }
+
+      function renderMessage(message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className =
+          'message ' + (message.isUser ? 'user-message' : 'gemini-message');
+        if (!message.isUser) {
+          const html = marked.parse(message.content);
+          messageDiv.innerHTML = html;
+          messageDiv.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+            const copyBtn = document.createElement('button');
+            copyBtn.textContent = 'Copy';
+            copyBtn.className = 'copy-btn';
+            copyBtn.addEventListener('click', () => {
+              navigator.clipboard.writeText(block.innerText);
+              const ack = document.createElement('span');
+              ack.className = 'copy-ack';
+              ack.textContent = 'Copied!';
+              messageDiv.appendChild(ack);
+              setTimeout(() => {
+                ack.classList.add('show');
+              }, 0);
+              setTimeout(() => {
+                ack.classList.remove('show');
+                messageDiv.removeChild(ack);
+              }, 1500);
+            });
+            block.parentNode.style.position = 'relative';
+            block.parentNode.appendChild(copyBtn);
+          });
+        } else {
+          messageDiv.textContent = message.content;
+        }
+        chatHistoryElement.appendChild(messageDiv);
+      }
+
+      function addMessage(content, isUser = true) {
+        const message = {
+          content: content,
+          isUser: isUser,
+          timestamp: new Date().toISOString(),
+        };
+        chatHistoryData.push(message);
+        saveChatHistory();
+        renderMessage(message);
+        chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
+      }
+
+      // Submit message on Enter key or Send button click
+      document.getElementById('ask-btn').addEventListener('click', sendMessage);
+      questionInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      function sendMessage() {
+        const question = questionInput.value.trim();
+        if (!question) return;
+        addMessage(question, true);
+        questionInput.value = '';
+        callGeminiAPI(question);
+      }
+
+      // ----- Gemini API Call -----
+      function callGeminiAPI(question) {
+        const key = localStorage.getItem('geminiApiKey');
+        if (!key) {
+          alert('API key not set. Please set your Gemini API key.');
+          return;
+        }
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+        const payload = {
+          contents: [
+            {
+              parts: [{ text: question }],
+            },
+          ],
+        };
+        const loadingMessage = {
+          content: 'Loading...',
+          isUser: false,
+          timestamp: new Date().toISOString(),
+        };
+        addMessage(loadingMessage.content, false);
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Remove the last "Loading..." message
+            chatHistoryData.pop();
+            chatHistoryElement.removeChild(chatHistoryElement.lastChild);
+            if (data?.candidates?.length > 0) {
+              const answer =
+                data.candidates[0]?.content?.parts[0]?.text ||
+                'No answer found.';
+              addMessage(answer, false);
+            } else {
+              addMessage('No answer found.', false);
+            }
+            saveChatHistory();
+          })
+          .catch((error) => {
+            chatHistoryData.pop();
+            chatHistoryElement.removeChild(chatHistoryElement.lastChild);
+            addMessage('Something went wrong: ' + error.message, false);
+          });
+      }
+
+      // ----- Initialization -----
+      renderChatHistory();
     </script>
   </body>
 </html>

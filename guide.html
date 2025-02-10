@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guide - Gemini Query Lab</title>
+    <!-- Highlight.js for code block styling -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nord.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <style>
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e1e1e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #6200ea49;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7e3ff2;
+      }
+
+      /* Global Styles */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      a {
+        color: #6200ea;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .hidden {
+        display: none;
+      }
+
+      /* Header */
+      header {
+        background-color: rgba(30, 30, 30, 0.8);
+        padding: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 99%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .logo span {
+        color: #6200ea;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      .header-buttons {
+        display: flex;
+        gap: 12px;
+      }
+      .header-buttons button {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .header-buttons button:hover,
+      .header-buttons button:active {
+        background-color: #6200ea;
+        color: #fff;
+      }
+
+      /* Main Content */
+      main {
+        padding: 80px 16px 16px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .guide-section {
+        margin-bottom: 32px;
+      }
+      .guide-section h2 {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #6200ea;
+        padding-bottom: 4px;
+      }
+      .guide-section p {
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+      .guide-section ul {
+        margin-left: 20px;
+        margin-bottom: 16px;
+      }
+      .guide-section li {
+        margin-bottom: 8px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: transparent;
+        padding: 8px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #888;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 600px) {
+        header {
+          padding: 12px;
+        }
+        .logo {
+          font-size: 20px;
+        }
+        main {
+          padding: 60px 8px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">Gemini <span>X</span> Drastic</div>
+      <div class="header-buttons">
+        <button onclick="location.href='index.html'" title="Home">Home</button>
+        <button onclick="location.href='guide.html'" title="Guide">
+          Guide
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="guide-section">
+        <h1>Guide to Gemini Query Lab</h1>
+        <p>
+          Welcome to the Gemini Query Lab guide page! This page provides a
+          comprehensive walkthrough on creating Gemini API keys, efficiently
+          utilizing this platform, and an overview of the features available.
+        </p>
+      </div>
+
+      <div class="guide-section">
+        <h2>Creating Gemini API Keys</h2>
+        <p>To obtain your Gemini API key, follow these steps:</p>
+        <ul>
+          <li>
+            Visit the
+            <a href="https://console.cloud.google.com" target="_blank"
+              >Google Cloud Console</a
+            >.
+          </li>
+          <li>Create or select an existing project.</li>
+          <li>
+            Enable the Gemini API from the API Library. For more information on
+            Google's AI offerings, visit the
+            <a href="https://ai.google.dev/" target="_blank"
+              >Google AI Developer Site</a
+            >.
+          </li>
+          <li>Navigate to the Credentials section and create a new API key.</li>
+          <li>
+            Copy your API key and paste it into the API Key Settings in Gemini
+            Query Lab.
+          </li>
+        </ul>
+      </div>
+
+      <div class="guide-section">
+        <h2>Utilizing the Platform Efficiently</h2>
+        <p>
+          Gemini Query Lab is designed to provide an intuitive interface for
+          interacting with the Gemini API. Key features include:
+        </p>
+        <ul>
+          <li>
+            <strong>Chat Interface:</strong> Ask questions and receive real-time
+            answers.
+          </li>
+          <li>
+            <strong>Markdown Rendering:</strong> Responses support Markdown
+            formatting including code blocks.
+          </li>
+          <li>
+            <strong>Copy Code:</strong> Easily copy code snippets with the copy
+            button.
+          </li>
+          <li>
+            <strong>Chat History:</strong> Your conversation is saved locally
+            and you can download or clear it as needed.
+          </li>
+          <li>
+            <strong>Dark Theme:</strong> Enjoy a sleek, dark interface that’s
+            easy on the eyes.
+          </li>
+        </ul>
+        <p>
+          Explore the settings panel to update your API key and customize your
+          experience.
+        </p>
+      </div>
+
+      <div class="guide-section">
+        <h2>About the Developer</h2>
+        <p>
+          This platform was developed by <strong>DrasticCoder</strong>, driven
+          by a passion for creating intuitive and powerful tools for interacting
+          with advanced AI APIs. The design is a result of continuous learning
+          and iteration.
+        </p>
+      </div>
+
+      <div class="guide-section">
+        <h2>Acknowledgements</h2>
+        <p>
+          A special thank you to <strong>Dhiraj Amin Sir</strong> for the
+          inspiring idea behind this platform. His guidance and support were
+          invaluable in shaping this project.
+        </p>
+      </div>
+
+      <div class="guide-section">
+        <h2>Additional Resources</h2>
+        <p>
+          For further details on Google’s AI offerings and API development,
+          visit:
+        </p>
+        <ul>
+          <li>
+            <a href="https://ai.google.dev/" target="_blank"
+              >Google AI Developer Site</a
+            >
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <a href="https://drasticcoder.in" target="_blank">DrasticCoder</a> ©
+        2025
+      </p>
+    </footer>
+  </body>
+</html>

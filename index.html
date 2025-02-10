@@ -61,8 +61,14 @@
         z-index: 1000;
       }
       .logo {
-        font-size: 18px;
-        color: #e0e0e0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .logo span {
+        color: #6200ea;
+        font-family: 'Courier New', Courier, monospace;
       }
       .header-buttons {
         display: flex;
@@ -91,6 +97,10 @@
       /* Welcome Page */
       #welcome-page {
         text-align: center;
+        height: calc(100vh - 120px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
       #welcome-page h1 {
         font-size: 2em;
@@ -287,6 +297,9 @@
         }
         .logo {
           font-size: 20px;
+          font-weight: bold;
+          color: #fff;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
           margin-bottom: 8px;
         }
         .header-buttons {
@@ -315,7 +328,7 @@
   <body>
     <!-- Header -->
     <header>
-      <div class="logo">Gemini x Drastic</div>
+      <div class="logo">Gemini <span>X</span> Drastic</div>
       <div class="header-buttons">
         <button id="download-history" title="Download History">
           <svg
@@ -387,7 +400,7 @@
           <p>Get started by setting up your API key.</p>
           <button id="setup-key-btn">Set Up API Key</button>
           <p>
-            <a href="https://drasticcoder.in/gemini-guide" target="_blank">
+            <a href="/guide.html" target="_blank">
               Need help? View our guide
             </a>
           </p>

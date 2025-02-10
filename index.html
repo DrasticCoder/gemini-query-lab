@@ -13,6 +13,22 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
+      /* scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e1e1e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #6200ea49;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7e3ff2;
+      }
+
       /* Global Styles */
       body {
         margin: 0;
@@ -32,20 +48,20 @@
       }
       /* Header */
       header {
-        background-color: #1e1e1e;
-        padding: 16px;
+        background-color: rgba(30, 30, 30, 0.8);
+        padding: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: fixed;
         top: 0;
-        width: 100%;
-        border-bottom: 1px solid #333;
+        width: 99%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
         z-index: 1000;
       }
       .logo {
-        font-size: 24px;
-        font-weight: bold;
+        font-size: 18px;
         color: #e0e0e0;
       }
       .header-buttons {
@@ -53,16 +69,18 @@
         gap: 12px;
       }
       .header-buttons button {
-        background-color: #6200ea;
-        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #6200ea;
         border: none;
         padding: 8px 12px;
         border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, color 0.3s;
       }
-      .header-buttons button:hover {
-        background-color: #7e3ff2;
+      .header-buttons button:hover,
+      .header-buttons button:active {
+        background-color: #6200ea;
+        color: #fff;
       }
       /* Main Content */
       main {
@@ -123,6 +141,10 @@
         border-radius: 4px;
         font-size: 1em;
       }
+      input:focus {
+        outline: none;
+        border-color: #6200ea;
+      }
       #chat-input-container button {
         background-color: #6200ea;
         color: #fff;
@@ -146,7 +168,9 @@
         word-wrap: break-word;
       }
       .user-message {
-        background-color: #6200ea;
+        /* background-color: #6200ea; */
+        /* background-color: #333; */
+        background: #753fc0;
         color: #fff;
         margin-left: auto;
         border-radius: 8px 8px 0 8px;
@@ -247,21 +271,28 @@
       }
       /* Footer */
       footer {
-        background-color: #1e1e1e;
-        padding: 16px;
+        background-color: transparent;
+        padding: 8px;
         text-align: center;
-        border-top: 1px solid #333;
+        font-size: 0.8em;
+        color: #888;
       }
       /* Responsive Adjustments */
       @media (max-width: 600px) {
         header {
-          flex-direction: column;
-          align-items: flex-start;
+          /* flex-direction: column; */
+          /* align-items: flex-start; */
           padding: 12px;
+          width: 95%;
         }
         .logo {
           font-size: 20px;
           margin-bottom: 8px;
+        }
+        .header-buttons {
+          /* flex-direction: column; */
+          align-items: flex-start;
+          gap: 8px;
         }
         main {
           padding: 60px 8px 8px;
@@ -284,12 +315,66 @@
   <body>
     <!-- Header -->
     <header>
-      <div class="logo">Gemini Query Lab</div>
+      <div class="logo">Gemini x Drastic</div>
       <div class="header-buttons">
-        <button id="download-history">Download History</button>
-        <button id="clear-history">Clear History</button>
-        <button id="toggle-theme">Toggle Theme</button>
-        <button id="settings-btn">Settings</button>
+        <button id="download-history" title="Download History">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 16V4M12 16L8 12M12 16L16 12M4 20H20"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <button id="clear-history" title="Clear History">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 6H5H21M19 6L18.405 19.14C18.349 20.19 17.514 21 16.462 21H7.538C6.486 21 5.651 20.19 5.595 19.14L5 6M10 11V17M14 11V17M9 6V4C9 2.895 9.895 2 11 2H13C14.105 2 15 2.895 15 4V6"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <button id="settings-btn" title="Settings">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M19.4 15C19.731 14.333 20 13.667 20 13C20 12.333 19.731 11.667 19.4 11M4.6 11C4.269 11.667 4 12.333 4 13C4 13.667 4.269 14.333 4.6 15M15 4.6C14.333 4.269 13.667 4 13 4C12.333 4 11.667 4.269 11 4.6M11 19.4C11.667 19.731 12.333 20 13 20C13.667 20 14.333 19.731 15 19.4M19.4 8.6C19.731 9.267 20 9.933 20 10.6C20 11.267 19.731 11.933 19.4 12.6M4.6 12.6C4.269 11.933 4 11.267 4 10.6C4 9.933 4.269 9.267 4.6 8.6M8.6 4.6C9.267 4.269 9.933 4 10.6 4C11.267 4 11.933 4.269 12.6 4.6M12.6 19.4C11.933 19.731 11.267 20 10.6 20C9.933 20 9.267 19.731 8.6 19.4"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -326,9 +411,8 @@
     <!-- Footer -->
     <footer>
       <p>
-        DrasticCoder © 2025 (<a href="https://drasticcoder.in" target="_blank"
-          >drasticcoder.in</a
-        >)
+        <a href="https://drasticcoder.in" target="_blank">DrasticCoder</a> ©
+        <span id="current-year"></span>
       </p>
     </footer>
 
@@ -350,14 +434,6 @@
 
     <script>
       // ----- Theme and Page Initialization -----
-      // For this version we stick to the dark theme.
-      // (The toggle-theme button is kept for demonstration.)
-      const theme = localStorage.getItem('theme') || 'dark';
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
 
       // ----- Page Visibility -----
       const welcomePage = document.getElementById('welcome-page');
@@ -376,16 +452,13 @@
       updatePageVisibility();
 
       // ----- Header Buttons -----
-      document.getElementById('toggle-theme').addEventListener('click', () => {
-        // For demonstration toggle (but we stick to dark theme by default)
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
-
       document
         .getElementById('download-history')
         .addEventListener('click', () => {
-          const historyText = localStorage.getItem('chatHistory') || '';
+          const historyText =
+            "This script was generated from DrasticCoder's Gemini Query Lab tool\n\n" +
+            'Visit us at https://drasticcoder.in\n\n' +
+            (localStorage.getItem('chatHistory') || '');
           const blob = new Blob([historyText], { type: 'text/plain' });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
@@ -561,6 +634,10 @@
 
       // ----- Initialization -----
       renderChatHistory();
+
+      //   footer year
+      document.getElementById('current-year').textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

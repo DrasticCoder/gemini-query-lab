@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini API Question Answering</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      input[type='text'] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #response {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .error {
+        color: red;
+      }
+
+      .loading {
+        color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ask a Question</h1>
+      <label for="apiKey">Enter your Gemini API Key:</label>
+      <input type="text" id="apiKey" placeholder="Your API Key" />
+
+      <label for="question">Ask a Question:</label>
+      <input type="text" id="question" placeholder="Type your question here" />
+
+      <button onclick="askQuestion()">Ask Question</button>
+
+      <div id="response" class="loading"></div>
+    </div>
+
+    <script>
+      // Store API key in sessionStorage when entered
+      if (sessionStorage.getItem('apiKey')) {
+        document.getElementById('apiKey').value =
+          sessionStorage.getItem('apiKey');
+      }
+
+      // Function to handle asking a question
+      function askQuestion() {
+        const apiKey = document.getElementById('apiKey').value;
+        const question = document.getElementById('question').value;
+        const responseDiv = document.getElementById('response');
+
+        if (!apiKey || !question) {
+          alert('Please enter both API Key and a question.');
+          return;
+        }
+
+        // Save API key in sessionStorage
+        sessionStorage.setItem('apiKey', apiKey);
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+        // Prepare the request payload
+        const payload = {
+          contents: [
+            {
+              parts: [
+                {
+                  text: question,
+                },
+              ],
+            },
+          ],
+        };
+
+        console.log('Sending request to:', apiUrl);
+        console.log('Payload:', JSON.stringify(payload));
+
+        // Show loading state
+        responseDiv.classList.add('loading');
+        responseDiv.textContent = 'Loading...';
+
+        // Make the API call
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+          .then((response) => {
+            console.log('Raw response:', response);
+            return response.json();
+          })
+          .then((data) => {
+            console.log('Parsed response:', data);
+
+            if (data && data.candidates && data.candidates.length > 0) {
+              const answer =
+                data.candidates[0]?.content?.parts[0]?.text ||
+                'No answer found.';
+              console.log('Extracted answer:', answer);
+
+              responseDiv.classList.remove('loading');
+              responseDiv.innerHTML = `<strong>Answer:</strong><br>${answer}`;
+            } else {
+              console.log('No valid answer found in response.');
+              responseDiv.classList.remove('loading');
+              responseDiv.classList.add('error');
+              responseDiv.innerHTML = `<strong>Error:</strong><br>No answer found.`;
+            }
+          })
+          .catch((error) => {
+            console.error('Fetch error:', error);
+            responseDiv.classList.remove('loading');
+            responseDiv.classList.add('error');
+            responseDiv.innerHTML = `<strong>Error:</strong><br>Something went wrong: ${error.message}`;
+          });
+      }
+
+      // Clear session storage when the tab is closed
+      window.addEventListener('beforeunload', () => {
+        sessionStorage.removeItem('apiKey');
+      });
+    </script>
+  </body>
+</html>
